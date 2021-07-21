@@ -1,50 +1,19 @@
-//appeler l'api fetch() pour récupérer les ressources
-// utiliser un live server
-// tout ce qui circule sur le net est une chaîne de caractère
-fetch("data.json")
-    .then((response) => {
-        return response.json();
-    
-    })
+fetch('data.json') // renvoie une promesse
+.then((response) => response.json()) // renvoie aussi une promesse
+.then((data) => {
 
-    .then((data) => {
-        console.log(data);
-        showPhotographers(data);
-        
-    });
+        let list = new List();
+        //-- afficher les 6 photographes (Photographer.js)
+        data.photographers.forEach((item) => {
+            
+            let photographe = new Photographer(item);
+            list.add(photographe);
+            
+        });
 
-
-
-
-
-
-
-
-
-
-// fonctions 
-// --- afficher photographes sur index.html
-function showPhotographers(data){
-    for(let i = 0; i < data.photographers.length; i++) {
-        let photographe = data.photographers[i];
-        console.log(photographe);
-
-        let sectionPhotographers = document.getElementById('photographers');
-        let articlePhotographers = document.createElement('article');
-        articlePhotographers.className ='profiles';
-    
-        let templatePhotographer = `
-        <a href="photographers.html?id=${photographe.id}" title="${photographe.name}">
-            <img src="img/Photographers_ID_Photos/${photographe.portrait}" alt="${photographe.alt}">
-            <h2 class="name">${photographe.name}</h2>
-        </a>
-        <p class="location">${photographe.city}, ${photographe.country}</p>
-        <p class="tagline">${photographe.tagline}</p>
-        <p class="price">${photographe.price}€/jour</p>
-        
-        `
-        sectionPhotographers.appendChild(articlePhotographers);
-        articlePhotographers.innerHTML = templatePhotographer;
-        
-    }
-}    
+        list.getTags();
+        list.displayTags();
+        list.display(list.all); // passe tous les photographes une 1ere fois.
+        list.listenForFilter();
+       
+});
