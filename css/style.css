@@ -160,7 +160,7 @@ section img{
     margin-top: .5rem;
 }
 
-ul li {
+ul li{
     list-style: none;
 }
 
@@ -172,10 +172,16 @@ ul li span{
     font-weight: 500;
     margin: 2px;
     padding: 2px 5px;
+    cursor: pointer;
     text-decoration: none;
     transition: all .2s;
 }
 
+ul li
+span.actived, span:hover{
+    background-color: #901C1C;
+    color: #fff;
+}
 /*responsive*/
 @media (min-width:375px){
     .logo img{
@@ -217,6 +223,7 @@ ul li span{
       margin: 100px auto;
     }
 }
+
 
 
 @media (min-width: 1200px) {
