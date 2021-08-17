@@ -13,15 +13,29 @@ fetch('data.json') // renvoie une promesse
             list.add(photographe);
         });
 
+        let people = list.all // variable par defaut
         list.getTags();
         list.displayTags();
-        //-- prends les tags de la page photographe et filtre sur le même tag sur l'index.html.
-        list.display(list.all); // passe tous les photographes une 1ere fois.
-        list.listenForFilter();
-        list.listenForFiltersTags();
+        if(tag)
+        {
+            let button = document.querySelector('[data-filter="' + tag + '"]');
+            list.activateTag(button, tag);
+            people = list.filter();
 
+        }
+
+            list.display(people); // passe tous les photographes une 1ere fois.
+            
+            //-- prends les tags de la page photographe et filtre sur le même tag sur l'index.html.
+            list.listenForFilter();
+            list.listenForFiltersTags();
+            
+           
         
-    })
+        
+        
+           
+})
 
         
         

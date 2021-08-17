@@ -65,14 +65,17 @@ class Photographer
     renderFilters()
     {
         return `<span class="filter__label" id="orderBy">Trier par</span>
-
-                <div class="filter__list" aria-labelledby="orderBy">
-                <div class="filter__list" role="button" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="orderBy">
-					<button class="filter__list__item selected" name="popularity" tabindex="0" role="option" aria-activedescendant="true" aria-selected="true">Popularité</button>
-					<button class="filter__list__item" name="date" tabindex="0" role="option" aria-activedescendant="true" aria-selected="false">Date</button>
-					<button class="filter__list__item" name="title" tabindex="0" role="option" aria-activedescendant="true" aria-selected="false">Titre</button>
+                <div class="filter__list" id="filter__button" aria-labelledby="orderBy">
+                    <div class="filter__list" role="button" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="orderBy">
+                        <button class="filter__list__item selected" data-name="popularity" tabindex="0" role="option" aria-activedescendant="true" aria-selected="true">Popularité</button>
+                        <button class="filter__list__item" data-name="date" tabindex="0" role="option" aria-activedescendant="true" aria-selected="false">Date</button>
+                        <button class="filter__list__item" data-name="title" tabindex="0" role="option" aria-activedescendant="true" aria-selected="false">Titre</button>    
+                    </div>
                 </div>`
+
+                
     }
+
 
     // presentation
     renderProfile()
@@ -96,7 +99,8 @@ class Photographer
                     <img class="portrait" src="img/Photographers_ID_Photos/small/${this.portrait}" alt="${this.name}">
                 </div>`
     }  
-    
+   
+   
 }
 
 

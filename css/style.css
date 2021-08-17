@@ -18,7 +18,7 @@ a {
     text-decoration: none;
 }
 
-h1, .name, .location, .tagline, ul li{
+h1, .name, .location, .tagline{
     font-weight: 400;
     font-style: normal;
 }
@@ -83,6 +83,8 @@ nav ul li span{
     margin-bottom: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
+    color: #901C1C;
+    font-weight: 500;
 }
 
 nav ul li span:hover,
@@ -160,11 +162,11 @@ section img{
     margin-top: .5rem;
 }
 
-ul li{
+section ul li{
     list-style: none;
 }
 
-ul li span{
+section ul a li span{
     border: .5px solid #C4C4C4;
     border-radius: 11px;
     color: #901C1C;
@@ -176,12 +178,12 @@ ul li span{
     text-decoration: none;
     transition: all .2s;
 }
-
-ul li
-span.actived, span:hover{
+section ul a li span:hover, 
+span.actived{
     background-color: #901C1C;
     color: #fff;
 }
+
 /*responsive*/
 @media (min-width:375px){
     .logo img{

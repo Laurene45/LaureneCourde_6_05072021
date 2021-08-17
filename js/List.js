@@ -132,17 +132,19 @@ class List
                 //permet de savoir sur quel tag, on clique
                 if (this.tagSelected.has(tag)) {
                     this.deactivate(tagDom, tag); 
-                       
+                    
+                    
                 }else {
                     this.activateTag(tagDom, tag)
                 }
                 
                 let list = this.filter();
+
                 if (this.tagSelected.size === 0) {
                     list = this.all;
                 }
-                
-                this.display(list);   
+                this.display(list);
+                  
                 
             })
         })

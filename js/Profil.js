@@ -19,11 +19,40 @@ fetch('data.json') // renvoie une promesse
     let medias = data.media.filter(media => media.photographerId == id);
     let portfolio = new Portfolio(medias);
     portfolio.hydrate(medias);
-    portfolio.display();
-    portfolio.filters()
-    portfolio.createCount();
-    portfolio.counterLike();
+    portfolio.build(portfolio.all);
+    portfolio.listenForDropdownToggle();
+    portfolio.listenForFilters();
+   // portfolio.ListenForSlider();
     
+
+
+    
+
+    
+   
+   
+    
+    
+
+
+
+   
+    
+    
+
+   
+    
+    
+    
+
+    
+    
+
+
+
+    
+
+
 
 
 
