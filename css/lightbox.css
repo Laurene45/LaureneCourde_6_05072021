@@ -1,8 +1,8 @@
+/* --- LIGHTBOX */
 /*cache la lightbox*/
 .hidden{
   display:none
 }
-
 
 .lightbox {
   position: fixed;
@@ -14,8 +14,6 @@
   z-index: 20;
 }
 
-
-
 .lightbox__container {
   display: flex;
   align-items: center;
@@ -24,14 +22,10 @@
   height: 100%;
 }
 
-
-
 .lightbox__container img, .lightbox__container video {
   max-height: 80vh;
   max-width: 80vw;
 }
-
-
 
 .lightbox__container figcaption {
   color: #901C1C;
@@ -39,11 +33,8 @@
   margin-top: 7px;
 }
 
-
-
 .lightbox__prev, 
 .lightbox__next {
-  
   position: absolute;
   top: 45%;
   transform: translateY(-50%);
@@ -58,21 +49,14 @@
   right:0;
 }
 
-
-
 .lightbox__prev {
   left: 15px;
   transform: translateY(-50%) rotate(180deg);
-  
 }
-
-
 
 .lightbox__next {
   right: 15px;
 }
-
-
 
 .lightbox__close {
   position: absolute;
@@ -90,9 +74,7 @@
 }
 
 
-
-
-/* -- responsive */
+/*--- RESPONSIVE ---*/
 @media (min-width: 768px) {
   .lightbox__next, .lightbox__prev {
     width: 30px;

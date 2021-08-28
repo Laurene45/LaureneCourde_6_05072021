@@ -26,8 +26,7 @@ class Media
         e.target.classList.add('fill'); // coeur like rempli
     }
     
-    // compteurs des likes +/-
-    
+    //-- Likes : ompteurs +/-
     react(e)
     {
         if(this.hasBeenLiked)

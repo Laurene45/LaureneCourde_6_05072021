@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
 
 /*structure*/
-body{
+body {
     margin: 0;
 }
   
-html, body{
+html, body {
     font-family: "DM Sans", sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -18,14 +18,14 @@ a {
     text-decoration: none;
 }
 
-h1, .name, .location, .tagline{
+h1, .name, .location, .tagline {
     font-weight: 400;
     font-style: normal;
 }
 
 /*navigation*/
 /*passer au contenu*/
-.skip-links{
+.skip-links {
     opacity: 0;
     height: 0;
     overflow: hidden;
@@ -42,20 +42,20 @@ h1, .name, .location, .tagline{
     margin: 0 auto;  
 }
 
-.skip-links:focus{
+.skip-links:focus {
     opacity: 1;
     height: auto;
     margin: 4px auto;
 }
 
 /*header*/
-.header{
+.header {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
 }
 
-.header__wrapper{
+.header__wrapper {
     display: flex;
     flex-direction: column;
 }
@@ -65,7 +65,7 @@ h1, .name, .location, .tagline{
 }
 
 /*tag dans la navigation */
-nav ul{
+nav ul {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
@@ -74,7 +74,7 @@ nav ul{
     margin: 0;
 }
 
-nav ul li span{
+nav ul li span {
     border: 0.5px solid #C4C4C4;
     border-radius: 11px;
     padding: 2px 5px;
@@ -88,17 +88,17 @@ nav ul li span{
 }
 
 nav ul li span:hover,
-span.actived{
+span.actived {
     background-color: #901C1C;
     color: #fff;
 }
 
 /*6 photographes - main*/
-main{
+main {
     margin: 0 auto;
 }
 
-h1{
+h1 {
     position: absolute;
     color: #901C1C;
     margin: 0;
@@ -107,7 +107,7 @@ h1{
     right: 20px;
 }   
 
-section{
+section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -115,13 +115,13 @@ section{
 }
 
 /*photographers cards*/
-.profiles{
+.profiles {
     text-align: center;
     width: 350px;
     margin-bottom:30px;
 }
 
-section img{
+section img {
     background-color: #565755;
     border-radius: 50%;
     box-shadow: 0 0 0.8rem rgb(134 134 134 / 43%);
@@ -132,41 +132,41 @@ section img{
     width: 200px;    
 }
 
-.name{
+.name {
     font-size: 36px;
     color: #D3573C;
     margin: 20px 0 0;
 }
 
-.location, .tagline, .price{
+.location, .tagline, .price {
     margin: 0;
 }
 
-.location{
+.location {
     font-size: 13px;
     color: #901C1C;
 }
 
-.tagline{
+.tagline {
     font-size: 10px;
 }
 
-.price{
+.price {
     font-size: 9px;
 }
 
-.filter{
+.filter {
     display: flex;
     justify-content: center;
     margin-right: 3rem;
     margin-top: .5rem;
 }
 
-section ul li{
+section ul li {
     list-style: none;
 }
 
-section ul a li span{
+section ul a li span {
     border: .5px solid #C4C4C4;
     border-radius: 11px;
     color: #901C1C;
@@ -178,17 +178,19 @@ section ul a li span{
     text-decoration: none;
     transition: all .2s;
 }
+
 section ul a li span:hover, 
-span.actived{
+span.actived {
     background-color: #901C1C;
     color: #fff;
 }
 
 /*responsive*/
-@media (min-width:375px){
-    .logo img{
+@media (min-width:375px) {
+    .logo img {
         width:150px;
     }
+
     h1{
         font-size: 14px;
         top: 61px;
@@ -196,8 +198,8 @@ span.actived{
 }
 
 
-@media (min-width: 768px){
-    h1{
+@media (min-width: 768px) {
+    h1 {
         font-size: 22px;
         top: 55px;
     }
@@ -210,16 +212,20 @@ span.actived{
       align-items: center;
       flex-direction: row;
     }
+
     #navbar {
       margin: 0 0 0 72px;
     }
+
     h1 {
         font-size: 30px;
         top: 50px;
     }
-    .logo img{
+
+    .logo img {
         width:200px;
     }
+    
     main {
       max-width: 1200px;
       margin: 100px auto;

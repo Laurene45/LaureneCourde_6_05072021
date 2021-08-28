@@ -27,7 +27,7 @@ class Video extends Media
      
     }
 
-    showSlides()
+    showSlide()
     {
         document.getElementById('slide').innerHTML = 
         `<video controls>

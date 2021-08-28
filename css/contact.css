@@ -1,0 +1,109 @@
+/* --- FORMULAIRE */
+.contact {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(196, 196, 196, 0.4);
+    z-index: 20;
+    display: none;
+    overflow-y: scroll;
+}
+
+.contact__content {
+    max-width: 650px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 35px;
+    background-color: #DB8876;
+}
+
+.contact__content__title {
+    font-size: 36px;
+    margin: 0 0 20px;
+    color: #000000;
+}
+
+.contact__content input, .contact__content textarea {
+    display: block;
+    width: 93%;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.contact__content label {
+    font-size: 24px;
+}
+
+.contact__content__email {
+    min-height: 170px;
+    max-width: 100%;
+}
+
+.contact__content__send {
+    margin: 26px auto 0;
+    padding: 5px 50px;
+    font-size: 18px;
+    display: block;
+}
+
+.contact__content__close {
+    position: absolute;
+    top: 26px;
+    right: 26px;
+    width: 18px;
+    height: 18px;
+    background: transparent url("../img/icons/closeWhite.svg") center center no-repeat;
+    background-size: cover;
+    text-indent: 3000px;
+    overflow: hidden;
+    border: 0;
+    cursor: pointer;
+    z-index: 5;
+}
+
+@media (min-width: 768px) {
+    .contact__content {
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 40px 0;
+    }
+
+    .contact__content__title {
+        font-size: 64px;
+        margin-right: 45px;
+    }
+
+    .contact__content input, .contact__content textarea {
+        font-size: 30px;
+        width: 97%;
+    }
+
+    .contact__content label {
+        font-size: 36px;
+    }
+
+    .contact__content__send {
+      margin: 26px 0 0;
+      padding: 23px 50px;
+    }
+
+    .contact__content__close {
+      width: 42px;
+      height: 42px;
+      top: 35px;
+      right: 35px;
+    }
+
+}
+
+
+
+
+
+
+

@@ -21,19 +21,11 @@ fetch('data.json') // renvoie une promesse
             let button = document.querySelector('[data-filter="' + tag + '"]');
             list.activateTag(button, tag);
             people = list.filter();
-
         }
-
             list.display(people); // passe tous les photographes une 1ere fois.
-            
             //-- prends les tags de la page photographe et filtre sur le même tag sur l'index.html.
             list.listenForFilter();
-            list.listenForFiltersTags();
-            
-           
-        
-        
-        
+            list.listenForFiltersTags();   
            
 })
 

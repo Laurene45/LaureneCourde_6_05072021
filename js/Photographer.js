@@ -53,23 +53,26 @@ class Photographer
     }
 
 
-    // --- insert les données de la fiche photographe ... photographers.html
-    // informations
+    //-- insert les données de la fiche photographe ... photographers.html
+    //-- informations
     renderInfo()
     {
         return `<p class="info__likes"></p>
                 <p class="info__price">${this.price}€/jour</p>`
     }
 
-    // filtres 
+    //-- filtres 
     renderFilters()
     {
         return `<span class="filter__label" id="orderBy">Trier par</span>
-                <div class="filter__list" id="filter__button" aria-labelledby="orderBy">
-                    <div class="filter__list" role="button" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="orderBy">
-                        <button class="filter__list__item selected" data-name="popularity" tabindex="0" role="option" aria-activedescendant="true" aria-selected="true">Popularité</button>
-                        <button class="filter__list__item" data-name="date" tabindex="0" role="option" aria-activedescendant="true" aria-selected="false">Date</button>
-                        <button class="filter__list__item" data-name="title" tabindex="0" role="option" aria-activedescendant="true" aria-selected="false">Titre</button>    
+                <div class="filter__list" id="filter__button" aria-labelledby="orderBy"> 
+                    <button id="current-filter">Popularité</button>
+                    <i class="fas fa-chevron-down arrow-down-open" role='button'></i>
+                
+                    <div class="filter__list" id="listbox" role="button" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="orderBy">
+                        <button class="filter__list__item" data-name="Popularité" role="option"> Popularité</button>
+                        <button class="filter__list__item" data-name="Date" role="option"> Date</button>
+                        <button class="filter__list__item" data-name="Titre"  role="option"> Titre</button>    
                     </div>
                 </div>`
 
@@ -77,7 +80,7 @@ class Photographer
     }
 
 
-    // presentation
+    //-- presentation
     renderProfile()
     {
         let tags = ' ';
@@ -88,7 +91,7 @@ class Photographer
         })
         
         return `<div class="presentation__info">
-                    <button class="presentation__info__contact btn" id="${this.id}" data-name="${this.name}">Contactez-moi</button>
+                    <button class="presentation__info__contact btn modal-btn" id="${this.id}" data-name="${this.name}">Contactez-moi</button>
                     <h1>${this.name}</h1>
                     <p class="presentation__info__location">${this.city}, ${this.country}</p>
                     <p class="presentation__info__description">${this.tagline}</p>
@@ -100,6 +103,7 @@ class Photographer
                 </div>`
     }  
    
+
    
 }
 

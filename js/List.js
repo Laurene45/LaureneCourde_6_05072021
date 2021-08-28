@@ -9,7 +9,7 @@ class List
     }
     //Set() evite les doublons / stocke des valeurs uniques, type primitif ou des objets
     
-    //-- tags activés dans la navigation
+    //-- Tags : activés dans la navigation
     activateTag(button, tag)
     {
         button.classList.add('actived')
@@ -22,14 +22,14 @@ class List
         this.all.push(photographe)
     }
 
-    //-- tags désactivés dans la navigation
+    //-- Tags : désactivés dans la navigation
     deactivate(button, tag)
     {
         button.classList.remove('actived')
         this.tagSelected.delete(tag);
     }
 
-    // --- apparaît les profils 6 photographes
+    //-- Affichage : apparaît les profils 6 photographes
     display(photographers)
     {   
         //vider le html au départ pour eviter d'avoir un doublon de profil photographes.
@@ -42,7 +42,7 @@ class List
         })        
     }
 
-    // --- affiche Tags dans la navigation en html
+    //--Tags: affichés dans la navigation en html
     displayTags()
     {
         let html = '<ul>';
@@ -56,8 +56,7 @@ class List
         document.getElementById ('navbar').innerHTML = html; 
     }
 
-    // --- filtrer les tags (profils photographe avec # nav).
-    // ajout dans l'event 'click'
+    //-- Tags : filtrer (profils photographe avec # nav).
     filter()
     {
         let list =  new Set();
@@ -75,7 +74,7 @@ class List
         return list;
     }
     
-    // --- récupère toute la liste des Tags pour afficher dans Navigation
+    //-- Tags : récupère toute la liste Tags pour afficher dans navigation
     getTags()
     {
         this.all.forEach(photographe =>
@@ -88,7 +87,7 @@ class List
         });
     }
     
-    // --- Ecoute les tags de la navigation / filtre les photographes #
+    //-- Tags : écoute les tags de la navigation / filtre les photographes #
     listenForFilter()
     {
         document.querySelectorAll('.tag-filter').forEach(tag =>
@@ -116,7 +115,7 @@ class List
         })  
     }
 
-    // filtrer sur les tags des profils 6 photographes
+    //-- Tags: filtrer tags des profils 6 photographes
     listenForFiltersTags()
     {
         document.querySelectorAll('.profil-tag').forEach(tag =>
@@ -143,8 +142,7 @@ class List
                 if (this.tagSelected.size === 0) {
                     list = this.all;
                 }
-                this.display(list);
-                  
+                this.display(list); 
                 
             })
         })
