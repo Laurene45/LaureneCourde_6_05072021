@@ -13,8 +13,5 @@ class MediaFactory
             return new Image(data);
         }
     }
-
-    
-    
-       
+   
 }

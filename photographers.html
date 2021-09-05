@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style_photographers.css">
     <link rel="stylesheet" href="css/lightbox.css">
     <link rel="stylesheet" href="css/contact.css">
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon"/>
 
     <script src="https://kit.fontawesome.com/e70494c283.js" crossorigin="anonymous"></script>
 
@@ -18,8 +18,8 @@
 <body>
     <header class="header">
         <div class="header__wrapper">
-            <a href="index.html" class="logo" alt="Fisheye Home Page">
-                <img src="img/logo.svg" alt="logo Fisheye">
+            <a href="index.html" class="logo" aria-label="Fisheye HomePage">
+                <img src="img/logo.svg" alt="Fisheye HomePage">
             </a>
         </div>
     </header>
@@ -31,26 +31,14 @@
         <section id="media"></section>
     </main>
 
-
-    <!--Lightbox-->
-    <div id="slider" class="hidden">
-        <div id="lightbox" class="lightbox">
-            <button class="lightbox__close" id="lightboxClose">Fermer</button> 
-            <button class="lightbox__next">Suivant</button> 
-            <button class="lightbox__prev">Précédent</button> 
-            <div class="lightbox__container">
-                <figure id="slide"></figure>
-            </div>
-        </div> 
-    </div>
-
+    
     <!--Formulaire-->
-    <section id="contact" class="contact" aria-hidden="true" role="dialog">
+    <section id="contact" class="contact" role="dialog">
         <div class="contact__content">
             <button class="contact__content__close" id="contactClose" aria-label="Fermer le formulaire de contact">Fermer</button>
             <h1 class="contact__content__title" id="contactName"></h1>
             <form id="form">
-                <div class=>
+                <div>
                     <label for="firstname">Prénom</label>
                     <input name="firstname" id="firstname" type="text" aria-labelledby="firstname">
                 </div>
@@ -66,11 +54,24 @@
                     <label for="message">Votre message</label>
                     <textarea class="contact__content__email" name="message" id="message"></textarea>
                 </div>
-                <button class="contact__content__send btn">Envoyer</button>
+                <button class="contact__content__send btn" aria-label="Envoyer">Envoyer</button>
             </form>
         </div>
     </section>	
-
+    
+    
+    <!--Lightbox-->
+    <div id="slider" class="hidden" aria-label="image closeup view">
+        <div id="lightbox" class="lightbox">
+            <button class="lightbox__close" id="lightboxClose">Fermer</button> 
+            <button class="lightbox__next">Suivant</button> 
+            <button class="lightbox__prev">Précédent</button> 
+            <div class="lightbox__container">
+                <figure id="slide"></figure>
+            </div>
+        </div> 
+    </div>
+    
     <!--Tous les scripts JS-->
     <script src="js/Photographer.js"></script>
     <script src="js/Media.js"></script>
@@ -79,7 +80,6 @@
     <script src="js/MediaFactory.js"></script>
     <script src="js/Portfolio.js"></script>
     <script src="js/profil.js"></script>
-
     
 </body>
 </html>

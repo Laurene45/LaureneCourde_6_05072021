@@ -6,8 +6,8 @@ class List
         this.all = [];
         this.tags = new Set();
         this.tagSelected = new Set();
+        //Set() evite les doublons / stocke des valeurs uniques, type primitif ou des objets
     }
-    //Set() evite les doublons / stocke des valeurs uniques, type primitif ou des objets
     
     //-- Tags : activés dans la navigation
     activateTag(button, tag)
@@ -48,7 +48,7 @@ class List
         let html = '<ul>';
         this.tags.forEach((tag)=>
         {
-            html += `<a href='#'><li><span data-filter="${tag}" class="tag-filter">#${tag}</span></li></a>`
+            html += `<li><a href='#'><span data-filter="${tag}" class="tag-filter">#${tag}</span></a></li>`
         })
 
         html += '</ul>'
@@ -96,21 +96,8 @@ class List
             {
                 let tagDom = e.target;
                 // tagDom prend l'element en lui-même; pas une chaîne de caractères
-
                 let tag = tagDom.getAttribute('data-filter');
-                //permet de savoir sur quel tag, on clique
-                if (this.tagSelected.has(tag)) {
-                    this.deactivate(tagDom, tag);
-
-                }else {
-                    this.activateTag(tagDom, tag);
-                }
-
-                let list = this.filter();
-                if (this.tagSelected.size === 0) {
-                    list = this.all;
-                }
-                this.display(list);
+                this.toggle(tag, tagDom);
             })
         })  
     }
@@ -122,30 +109,31 @@ class List
         {
             tag.addEventListener('click', (e) =>
             {
-                let tagDom = e.target;
-                // tagDom prend l'element en lui-même; pas une chaîne de caractères
-
-                let tag = tagDom.getAttribute('data-filters-tag');
-                
-                
-                //permet de savoir sur quel tag, on clique
-                if (this.tagSelected.has(tag)) {
-                    this.deactivate(tagDom, tag); 
-                    
-                    
-                }else {
-                    this.activateTag(tagDom, tag)
-                }
-                
-                let list = this.filter();
-
-                if (this.tagSelected.size === 0) {
-                    list = this.all;
-                }
-                this.display(list); 
+                let tag = e.target.getAttribute('data-filters-tag');
+                let tagDom = document.querySelector(`[data-filter=${tag}].tag-filter`);
+                this.toggle(tag, tagDom); 
                 
             })
         })
+    }
+
+    toggle(tag, tagDom)
+    {
+        //permet de savoir sur quel tag, on clique
+        if (this.tagSelected.has(tag)) {
+            this.deactivate(tagDom, tag);
+
+        }else {
+            this.activateTag(tagDom, tag)
+        }
+        
+        let list = this.filter();
+
+        if (this.tagSelected.size === 0) {
+            list = this.all;
+        }
+        this.display(list); 
+        this.listenForFiltersTags();
     }
 
 }    

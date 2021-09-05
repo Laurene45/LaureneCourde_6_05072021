@@ -46,6 +46,7 @@ h1, .name, .location, .tagline {
     opacity: 1;
     height: auto;
     margin: 4px auto;
+    
 }
 
 /*header*/
@@ -74,7 +75,7 @@ nav ul {
     margin: 0;
 }
 
-nav ul li span {
+nav ul li a span {
     border: 0.5px solid #C4C4C4;
     border-radius: 11px;
     padding: 2px 5px;
@@ -87,11 +88,14 @@ nav ul li span {
     font-weight: 500;
 }
 
-nav ul li span:hover,
-span.actived {
+nav ul li a span:hover,
+nav ul li a span:focus,
+span.actived{
     background-color: #901C1C;
     color: #fff;
 }
+
+
 
 /*6 photographes - main*/
 main {
@@ -166,7 +170,7 @@ section ul li {
     list-style: none;
 }
 
-section ul a li span {
+section ul li a span {
     border: .5px solid #C4C4C4;
     border-radius: 11px;
     color: #901C1C;
@@ -179,13 +183,13 @@ section ul a li span {
     transition: all .2s;
 }
 
-section ul a li span:hover, 
-span.actived {
+section ul li a span:hover{
     background-color: #901C1C;
     color: #fff;
 }
 
-/*responsive*/
+
+/*-- RESPONSIVE--*/
 @media (min-width:375px) {
     .logo img {
         width:150px;
@@ -193,7 +197,7 @@ span.actived {
 
     h1{
         font-size: 14px;
-        top: 61px;
+        top: 60px;
     }
 }
 

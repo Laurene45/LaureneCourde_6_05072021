@@ -10,6 +10,7 @@ class Photographer
         this.tagline= data.tagline;
         this.price= data.price;
         this.portrait= data.portrait;
+        this.alt = data.alt;
         
     }
 
@@ -37,12 +38,12 @@ class Photographer
         let tags = ' ';
         this.tags.forEach(tag => {
    
-            tags += `<a href='#'><li><span data-filters-tag="${tag}" class="profil-tag">#${tag}</span></li></a>`
+            tags += `<li><a href='#'><span data-filters-tag="${tag}" class="profil-tag">#${tag}</span></a></li>`
 
         })
         return `<article class="profiles">
                 <a href="photographers.html?id=${this.id}" title="${this.name}">
-                    <img src="img/Photographers_ID_Photos/small/${this.portrait}" alt="${this.name}">
+                    <img src="img/Photographers_ID_Photos/small/${this.portrait}" alt="${this.alt}">
                     <h2 class="name">${this.name}</h2>
                 </a>
                 <p class="location">${this.city}, ${this.country}</p>
@@ -65,20 +66,17 @@ class Photographer
     renderFilters()
     {
         return `<span class="filter__label" id="orderBy">Trier par</span>
-                <div class="filter__list" id="filter__button" aria-labelledby="orderBy"> 
+                <div class="filter__list" id="filter__button"> 
                     <button id="current-filter">Popularité</button>
                     <i class="fas fa-chevron-down arrow-down-open" role='button'></i>
                 
                     <div class="filter__list" id="listbox" role="button" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="orderBy">
-                        <button class="filter__list__item" data-name="Popularité" role="option"> Popularité</button>
-                        <button class="filter__list__item" data-name="Date" role="option"> Date</button>
-                        <button class="filter__list__item" data-name="Titre"  role="option"> Titre</button>    
+                        <button class="filter__list__item" data-name="Popularité" role="option" aria-activedescendant='true'> Popularité</button>
+                        <button class="filter__list__item" data-name="Date" role="option" aria-activedescendant='true'> Date</button>
+                        <button class="filter__list__item" data-name="Titre"  role="option" aria-activedescendant='true'> Titre</button>    
                     </div>
                 </div>`
-
-                
     }
-
 
     //-- presentation
     renderProfile()
@@ -86,7 +84,7 @@ class Photographer
         let tags = ' ';
         this.tags.forEach(tag => {
    
-            tags += `<a href='index.html?tag=${tag}'><li><span data-filter="${tag}" class="presentation__info__tag">#${tag}</span></li></a>`
+            tags += `<li><a href='index.html?tag=${tag}'><span data-filter="${tag}" class="presentation__info__tag">#${tag}</span></a></li>`
 
         })
         
@@ -99,11 +97,9 @@ class Photographer
                 </div>
 
                 <div class="presentation__image">
-                    <img class="portrait" src="img/Photographers_ID_Photos/small/${this.portrait}" alt="${this.name}">
+                    <img class="portrait" src="img/Photographers_ID_Photos/small/${this.portrait}" alt="${this.alt}">
                 </div>`
     }  
-   
-
    
 }
 

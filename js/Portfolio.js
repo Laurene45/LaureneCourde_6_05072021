@@ -7,8 +7,34 @@ class Portfolio
         this.currentSliderIndex = 0; // enregistre l'index du slider actuel
     }
 
+    //-- construit l'affichage de la galerie 
+    build()
+    {
+        this.display();
+        this.listenForReactions();
+        this.listenForSlider(); // écoute le slider lightbox
+    }
+
+    // -- Formulaire : ferme la modal
+    closeModal()
+    {
+        document.querySelector("#contactClose").addEventListener("click", () =>
+        {
+            const contactCloseBtn = document.querySelector("#contactClose");
+            const contactBg = document.querySelector("#contact");
+            const main= document.querySelector("main");
+
+            document.body.classList.remove('modalOpen');
+            contactBg.style.display = "none";
+            main.setAttribute('aria-hidden', 'false');
+            contactBg.setAttribute('aria-hidden', 'true');
+
+        })
+        this.keyboard()
+    }
+
     //-- Like : compteur total de likes en bas de page
-    createCount(media)
+    createCount()
     {
         let counter= 0;
 
@@ -18,16 +44,6 @@ class Portfolio
         }
 
         document.querySelector('.info__likes').textContent = counter;
-    }
-    
-    //-- construit l'affichage de la galerie 
-    build()
-    {
-        this.display();
-        this.listenForReactions();
-        this.listenForSlider(); // écoute le slider lightbox
-        //this.listenForPrevious();
-        //this.listenForNext();
     }
     
     //-- affiche les galeries images et videos
@@ -41,6 +57,12 @@ class Portfolio
         })  
     }
     
+    //-- Lightbox : fermer le slider
+    hideSlider()
+    {
+        document.getElementById('slider').classList.add('hidden');
+    }
+
     //-- recupère les médias et remplit le squelette.
     hydrate(data)
     {
@@ -52,6 +74,69 @@ class Portfolio
             let media = factory.build(item);
             this.all.push(media) 
         });    
+    }
+
+    // CLAVIER Lightbox - next/previous/esc ( à ranger dans la liste des methodes)
+    keyboard() 
+    {
+        document.addEventListener('keydown', (key) => 
+        {
+            //-- echap pour fermer
+            if (key.code == 'Escape') 
+            {
+                document.getElementById('slider').classList.add('hidden');
+                
+                document.querySelector("#contact").style.display ="none";
+
+            }
+
+            // flèche droite  = next
+            else if (key.code == 'ArrowRight')
+            {
+                key.stopPropagation();
+            
+                if((this.currentSliderIndex +1) === this.all.length)
+                {
+                    this.currentSliderIndex = 0; // repasse à la première slide
+                } else {
+                    this.currentSliderIndex += 1; // avancer les slides +1
+                }
+                this.showSlide();
+            }
+
+            // flèche gauche  = previous
+            else if (key.code == 'ArrowLeft') 
+            {
+                if((this.currentSliderIndex) == 0)
+                {
+                    this.currentSliderIndex = this.all.length -1
+                } else {
+                    this.currentSliderIndex -= 1; // recule les slides -1
+                }
+                this.showSlide();  
+            }
+        });
+    }
+
+    //-- Formulaire : lance la modal
+    launchModal()
+    {
+        document.querySelector(".modal-btn").addEventListener("click", () =>
+        {
+            const contactBg = document.querySelector("#contact");
+            const contactBtn = document.querySelector(".modal-btn");
+            const contactName = document.querySelector("#contactName");
+            const main= document.querySelector("main");
+
+            document.body.classList.add('modalOpen');
+            contactName.textContent = "Contactez-moi " +  
+            contactBtn.getAttribute('data-name');
+            contactBg.style.display = "block";
+            main.setAttribute('aria-hidden', 'true');
+            contactBg.setAttribute('aria-hidden', 'false');
+            
+        })
+
     }
 
     //-- Dropdown : ouvre avec la flèche popularité/date/titre
@@ -68,13 +153,16 @@ class Portfolio
                 this.dropDownOpen = false;
                 document.getElementById('current-filter').style.display ="block";   
                 document.getElementById('listbox').style.display ="none"; 
+                document.getElementById('listbox').setAttribute('aria-expanded', 'false');
+                document.getElementById('listbox').setAttribute('aria-selected', 'false');
 
             } else {
                 element.classList.add('open');  
                 this.dropDownOpen = true;
                 document.getElementById('current-filter').style.display ="none";
                 document.getElementById('listbox').style.display ="block";
-                                      
+                document.getElementById('listbox').setAttribute('aria-expanded', 'true');
+                document.getElementById('listbox').setAttribute('aria-selected', 'true');                      
             }				
         })
     }
@@ -91,18 +179,44 @@ class Portfolio
                     this.updateDropdownfilter(filter);
                     this.orderBy(filter);
                     this.build();
-
+                    
                 }
             })
         })
     }   
 
-    //-- Dropdown : mis à jour avec le data-name sélectionné
-    updateDropdownfilter(filter)
+    //-- Lightbox : boutons next et previous
+    listenForNext()
     {
-        document.getElementById('current-filter').innerText = filter ;
+        document.querySelector('.lightbox__next').addEventListener('click', (e) =>
+        {
+            e.stopPropagation();
+            //si l'index est égale au nombre d'élément du filtered
+            if((this.currentSliderIndex +1) === this.all.length)
+            {
+                this.currentSliderIndex = 0; // repasse à la première slide
+            } else {
+                this.currentSliderIndex += 1; // avancer les slides +1
+            }
+            this.showSlide();  
+        })
+    }   
+
+    listenForPrevious()
+    {
+        document.querySelector('.lightbox__prev').addEventListener('click', (e) =>
+        {
+            // si on est sur l'index 0, il faut aller à la dernière -1
+            
+            if((this.currentSliderIndex) == 0)
+            {
+                this.currentSliderIndex = this.all.length -1
+            } else {
+                this.currentSliderIndex -= 1; // recule les slides -1
+            }
+            this.showSlide();     
+        })
     }
-    
 
     //-- Like coeur : ajoute et retire des likes sur le coeur
     listenForReactions() 
@@ -112,13 +226,28 @@ class Portfolio
             document.querySelector(`[data-reaction-id="${media.id}"]`).addEventListener('click', (e) => 
             {
                 media.react(e); // compteur des likes +/- (media.js)
-                this.createCount();
-                
-            })
-            
+                this.createCount();  
+            }) 
         })
     }
 
+    //-- Lightbox
+    listenForSlider()
+    {
+        const items = document.querySelectorAll('.media__card__container');
+        items.forEach(item => {
+            item.addEventListener('click', (e) =>
+            {
+                e.stopPropagation();
+                let parent = e.target.closest('.media__card__container');
+                let id = parent.getAttribute('data-media-id');
+                this.startSlider();
+                this.currentSliderIndex = this.all.findIndex(element => element.id == id);
+                // findIndex: methode qui récupère un index dans un tableau
+                this.showSlide();  
+            })
+        })
+    }
 
     //-- Filtres : populaire/titre/date
     orderBy(filter)
@@ -139,23 +268,21 @@ class Portfolio
         }
     }
         
-    //-- Lightbox
-    listenForSlider()
+    //-- Lightbox : affichage avec le Render Video et images
+    showSlide()
     {
-        const items = document.querySelectorAll('.media__card__container');
-            
-            items.forEach(item => {
-                item.addEventListener('click', (e) =>
-                {
-                    e.stopPropagation();
-                    let parent = e.target.closest('.media__card__container');
-                    let id = parent.getAttribute('data-media-id');
-                    this.startSlider();
-                    this.currentSliderIndex = this.all.findIndex(element => element.id == id);
-                    // findIndex: methode qui récupère un index dans un tableau
-                    this.showSlide();
-                })
-            })
+        this.all[this.currentSliderIndex].showSlide();
+    }
+    
+    //-- Formulaire : envoi
+    sendForm()
+    {
+        const form = document.getElementById("form");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            this.submitForm();
+        })  
     }
 
     // -- LightBox : démarrer le slider
@@ -167,106 +294,6 @@ class Portfolio
             this.hideSlider()
         })  
     }
-    
-    //-- Lightbox : affichage avec le Render Video et images
-    showSlide()
-    {
-        this.all[this.currentSliderIndex].showSlide();
-        console.log(this.currentSliderIndex, this.all[this.currentSliderIndex].title);
-        
-    }
-
-    //-- Lightbox : fermer le slider
-    hideSlider()
-    {
-        document.getElementById('slider').classList.add('hidden');
-    }
-
-    //-- Lightbox : boutons next et previous
-    listenForNext()
-    {
-        document.querySelector('.lightbox__next').addEventListener('click', (e) =>
-        {
-            e.stopPropagation();
-            //si l'index est égale au nombre d'élément du filtered
-            if((this.currentSliderIndex +1) === this.all.length)
-            {
-                this.currentSliderIndex = 0; // repasse à la première slide
-            } else {
-                this.currentSliderIndex += 1; // avancer les slides +1
-            }
-            this.showSlide();
-        })
-
-    }   
-
-    listenForPrevious()
-    {
-        document.querySelector('.lightbox__prev').addEventListener('click', (e) =>
-        {
-            // si on est sur l'index 0, il faut aller à la dernière -1
-            
-            if((this.currentSliderIndex) == 0)
-            {
-                this.currentSliderIndex = this.all.length -1
-            } else {
-                this.currentSliderIndex -= 1; // recule les slides -1
-            }
-            this.showSlide();  
-        })
-    }
-
-
-    //-- Formulaire : lance la modal
-    launchModal()
-    {
-        document.querySelector(".modal-btn").addEventListener("click", () =>
-        {
-            const contactBg = document.querySelector("#contact");
-            const contactBtn = document.querySelector(".modal-btn");
-            const contactName = document.querySelector("#contactName");
-            const main= document.querySelector("main");
-
-            document.body.classList.add('modalOpen');
-            contactName.textContent = "Contactez-moi " +  
-            contactBtn.getAttribute('data-name');
-            contactBg.style.display = "block";
-            main.setAttribute('aria-hidden', 'true');
-            contactBg.setAttribute('aria-hidden', 'false');
-        })
-    
-    }
-   
-    // -- Formulaire : ferme la modal
-    closeModal()
-    {
-        document.querySelector("#contactClose").addEventListener("click", () =>
-        {
-            const contactCloseBtn = document.querySelector("#contactClose");
-            const contactBg = document.querySelector("#contact");
-            const main= document.querySelector("main");
-
-            document.body.classList.remove('modalOpen');
-            contactBg.style.display = "none";
-            main.setAttribute('aria-hidden', 'false');
-            contactBg.setAttribute('arria-hidden', 'true');
-
-
-        })
-    }
-    
-    //-- Formulaire : envoi
-    sendForm()
-    {
-        const form = document.getElementById("form");
-
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            this.submitForm();
-        })
-        
-    }
-
 
     //-- Formulaire: affichage des 3 champs dans les logs
     submitForm()
@@ -279,7 +306,13 @@ class Portfolio
 	    console.log("Nom: " + firstname.value + ", prénom: " + lastname.value + ", email: " + email.value + ", message: " + message.value);		
     }
 
+    //-- Dropdown : mis à jour avec le data-name sélectionné
+    updateDropdownfilter(filter)
+    {
+        document.getElementById('current-filter').innerText = filter ;
 
+    }  
+    
 }
     
 

@@ -10,8 +10,8 @@ class Media
         this.hasBeenLiked = false;
         this.date = data.date;
         this.price = data.price;
+        this.alt = data.alt;
         this.media = [];
-
     }  
 
     hate(e)

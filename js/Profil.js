@@ -4,13 +4,13 @@ const id = url.get('id');
 
 fetch('data.json') // renvoie une promesse
 .then((response) => response.json()) // renvoie aussi une promesse
-.then((data) => {
-
+.then((data) => 
+{
     //-- chercher l'id associé à celui de l'url.
-    //find() renvoie la valeur du 1er élément trouvé dans le tableau qui respecte la condition donnée par la fonction de test passée en argument. Sinon, la valeur undefined est renvoyée.
+    //find() renvoie la valeur du 1er élément trouvé dans le tableau qui respecte la condition donnée par la fonction de test passée en argument.
+    // Sinon, la valeur undefined est renvoyée.
     let item = data.photographers.find(photographer => photographer.id == id);
     let photographer = new Photographer(item);
-
     photographer.displayProfile();
     photographer.displayInfo();
     photographer.displayFilters();
@@ -23,55 +23,13 @@ fetch('data.json') // renvoie une promesse
     portfolio.listenForDropdownToggle(); // ouvre le dropdown
     portfolio.listenForFilters(); // filtres
     portfolio.createCount(); // compteur total
-    
-    portfolio.listenForPrevious(); 
+    portfolio.listenForPrevious(); // lightbox 
     portfolio.listenForNext();
-    
+    portfolio.keyboard(); // clavier ligthbox
     portfolio.launchModal(); // formulaire
     portfolio.closeModal(); 
     portfolio.sendForm();
-   
-    
-
-
-    
-
-    
-   
-   
-    
-    
-
-
-
-   
-    
-    
-
-   
-    
-    
-    
-
-    
-    
-
-
-
-    
-
-
-
-
-
-    
-
-    
-
-        
-
-
-     
+      
         
 })
 
