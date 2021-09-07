@@ -25,7 +25,6 @@ fetch('data.json') // renvoie une promesse
     portfolio.createCount(); // compteur total
     portfolio.listenForPrevious(); // lightbox 
     portfolio.listenForNext();
-    portfolio.keyboard(); // clavier ligthbox
     portfolio.launchModal(); // formulaire
     portfolio.closeModal(); 
     portfolio.sendForm();

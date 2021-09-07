@@ -38,7 +38,11 @@ class Photographer
         let tags = ' ';
         this.tags.forEach(tag => {
    
-            tags += `<li><a href='#'><span data-filters-tag="${tag}" class="profil-tag">#${tag}</span></a></li>`
+            tags += `
+            <li>
+                <a href='#'data-filters-tag="${tag}" class="profil-tag">#${tag}</a>
+                <span aria-hidden="true" hidden >#${tag}</span>
+            </li>`
 
         })
         return `<article class="profiles">
@@ -84,7 +88,12 @@ class Photographer
         let tags = ' ';
         this.tags.forEach(tag => {
    
-            tags += `<li><a href='index.html?tag=${tag}'><span data-filter="${tag}" class="presentation__info__tag">#${tag}</span></a></li>`
+            tags += `
+            <li>
+                <a href='index.html?tag=${tag}'>
+                    <span data-filter="${tag}" class="presentation__info__tag">#${tag}</span>
+                </a>
+            </li>`
 
         })
         

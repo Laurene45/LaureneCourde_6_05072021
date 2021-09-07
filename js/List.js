@@ -48,7 +48,11 @@ class List
         let html = '<ul>';
         this.tags.forEach((tag)=>
         {
-            html += `<li><a href='#'><span data-filter="${tag}" class="tag-filter">#${tag}</span></a></li>`
+            html += `
+            <li>
+                <a href='#' data-filter="${tag}" class="tag-filter">#${tag}</a>
+                <span aria-hidden="true" hidden>#${tag}</span>
+            </li>`
         })
 
         html += '</ul>'

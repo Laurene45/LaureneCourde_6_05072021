@@ -30,7 +30,7 @@ class Video extends Media
     showSlide()
     {
         document.getElementById('slide').innerHTML = 
-        `<video controls>
+        `<video controls autoplay>
             <source src="img/${this.photographerId}/${this.src}" type="video/mp4">
         </video>
         <figcaption class="media__card__details">

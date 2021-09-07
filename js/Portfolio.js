@@ -30,7 +30,11 @@ class Portfolio
             contactBg.setAttribute('aria-hidden', 'true');
 
         })
-        this.keyboard()
+    }
+
+    closeModalKeyboard()
+    {
+
     }
 
     //-- Like : compteur total de likes en bas de page
@@ -57,6 +61,31 @@ class Portfolio
         })  
     }
     
+    //-- Lightbox construction : boutons next et previous
+    handlePreviousSlide()
+    {
+        // si on est sur l'index 0, il faut aller à la dernière -1
+        if((this.currentSliderIndex) == 0)
+        {
+            this.currentSliderIndex = this.all.length -1
+        } else {
+            this.currentSliderIndex -= 1; // recule les slides -1
+        }
+        this.showSlide();  
+    }
+
+    handleNextSlide()
+    {
+        //si l'index est égale au nombre d'élément du filtered
+        if((this.currentSliderIndex +1) === this.all.length)
+        {
+            this.currentSliderIndex = 0; // repasse à la première slide
+        } else {
+            this.currentSliderIndex += 1; // avancer les slides +1
+        }
+        this.showSlide();
+    }
+
     //-- Lightbox : fermer le slider
     hideSlider()
     {
@@ -76,48 +105,6 @@ class Portfolio
         });    
     }
 
-    // CLAVIER Lightbox - next/previous/esc ( à ranger dans la liste des methodes)
-    keyboard() 
-    {
-        document.addEventListener('keydown', (key) => 
-        {
-            //-- echap pour fermer
-            if (key.code == 'Escape') 
-            {
-                document.getElementById('slider').classList.add('hidden');
-                
-                document.querySelector("#contact").style.display ="none";
-
-            }
-
-            // flèche droite  = next
-            else if (key.code == 'ArrowRight')
-            {
-                key.stopPropagation();
-            
-                if((this.currentSliderIndex +1) === this.all.length)
-                {
-                    this.currentSliderIndex = 0; // repasse à la première slide
-                } else {
-                    this.currentSliderIndex += 1; // avancer les slides +1
-                }
-                this.showSlide();
-            }
-
-            // flèche gauche  = previous
-            else if (key.code == 'ArrowLeft') 
-            {
-                if((this.currentSliderIndex) == 0)
-                {
-                    this.currentSliderIndex = this.all.length -1
-                } else {
-                    this.currentSliderIndex -= 1; // recule les slides -1
-                }
-                this.showSlide();  
-            }
-        });
-    }
-
     //-- Formulaire : lance la modal
     launchModal()
     {
@@ -134,6 +121,7 @@ class Portfolio
             contactBg.style.display = "block";
             main.setAttribute('aria-hidden', 'true');
             contactBg.setAttribute('aria-hidden', 'false');
+            document.getElementById('contactClose').focus();
             
         })
 
@@ -185,37 +173,44 @@ class Portfolio
         })
     }   
 
-    //-- Lightbox : boutons next et previous
+    //-- Lightbox : boutons next et previous  + clavier
     listenForNext()
     {
         document.querySelector('.lightbox__next').addEventListener('click', (e) =>
         {
             e.stopPropagation();
-            //si l'index est égale au nombre d'élément du filtered
-            if((this.currentSliderIndex +1) === this.all.length)
-            {
-                this.currentSliderIndex = 0; // repasse à la première slide
-            } else {
-                this.currentSliderIndex += 1; // avancer les slides +1
-            }
-            this.showSlide();  
+            this.handleNextSlide();
+            
         })
+
+
+        document.addEventListener('keydown', (key) => 
+        {
+            if (key.code == 'ArrowRight')
+            {
+                key.stopPropagation();
+                this.handleNextSlide();
+            }
+        });
     }   
 
     listenForPrevious()
     {
         document.querySelector('.lightbox__prev').addEventListener('click', (e) =>
         {
-            // si on est sur l'index 0, il faut aller à la dernière -1
-            
-            if((this.currentSliderIndex) == 0)
-            {
-                this.currentSliderIndex = this.all.length -1
-            } else {
-                this.currentSliderIndex -= 1; // recule les slides -1
-            }
-            this.showSlide();     
+            e.stopPropagation();
+            this.handlePreviousSlide(); 
         })
+
+        document.addEventListener('keydown', (key) => 
+        {
+            if (key.code == 'ArrowLeft') 
+            {
+                key.stopPropagation();
+                this.handlePreviousSlide();
+                 
+            }
+        });
     }
 
     //-- Like coeur : ajoute et retire des likes sur le coeur
@@ -245,6 +240,7 @@ class Portfolio
                 this.currentSliderIndex = this.all.findIndex(element => element.id == id);
                 // findIndex: methode qui récupère un index dans un tableau
                 this.showSlide();  
+               
             })
         })
     }
@@ -289,10 +285,20 @@ class Portfolio
     startSlider()
     {
         document.getElementById('slider').classList.remove('hidden');
+        document.getElementById('lightboxClose').focus();
         document.getElementById('lightboxClose').addEventListener('click', () => 
         {
-            this.hideSlider()
+            this.hideSlider();
         })  
+
+        document.addEventListener('keydown', (key) => 
+        {
+            //-- echap pour fermer
+            if (key.code == 'Escape') 
+            {
+                this.hideSlider();
+            } 
+        }); 
     }
 
     //-- Formulaire: affichage des 3 champs dans les logs
@@ -310,9 +316,7 @@ class Portfolio
     updateDropdownfilter(filter)
     {
         document.getElementById('current-filter').innerText = filter ;
-
     }  
-    
 }
     
 

@@ -75,7 +75,7 @@ nav ul {
     margin: 0;
 }
 
-nav ul li a span {
+nav ul li a {
     border: 0.5px solid #C4C4C4;
     border-radius: 11px;
     padding: 2px 5px;
@@ -88,13 +88,16 @@ nav ul li a span {
     font-weight: 500;
 }
 
-nav ul li a span:hover,
-nav ul li a span:focus,
-span.actived{
+nav ul li a:hover,
+nav ul li a:focus,
+a.actived{
     background-color: #901C1C;
     color: #fff;
 }
 
+.hidden {
+    overflow:hidden;
+}
 
 
 /*6 photographes - main*/
@@ -170,7 +173,7 @@ section ul li {
     list-style: none;
 }
 
-section ul li a span {
+section ul li a{
     border: .5px solid #C4C4C4;
     border-radius: 11px;
     color: #901C1C;
@@ -183,7 +186,8 @@ section ul li a span {
     transition: all .2s;
 }
 
-section ul li a span:hover{
+section ul li a:hover, 
+section ul li a:focus{
     background-color: #901C1C;
     color: #fff;
 }
@@ -201,14 +205,12 @@ section ul li a span:hover{
     }
 }
 
-
 @media (min-width: 768px) {
     h1 {
         font-size: 22px;
         top: 55px;
     }
 }
-
 
 @media (min-width: 992px) {
     .header__wrapper {
@@ -235,8 +237,6 @@ section ul li a span:hover{
       margin: 100px auto;
     }
 }
-
-
 
 @media (min-width: 1200px) {
     h1 {
