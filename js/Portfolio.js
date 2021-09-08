@@ -32,10 +32,6 @@ class Portfolio
         })
     }
 
-    closeModalKeyboard()
-    {
-
-    }
 
     //-- Like : compteur total de likes en bas de page
     createCount()
@@ -226,7 +222,7 @@ class Portfolio
         })
     }
 
-    //-- Lightbox
+    //-- Lightbox : lancement
     listenForSlider()
     {
         const items = document.querySelectorAll('.media__card__container');
