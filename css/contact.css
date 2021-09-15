@@ -71,7 +71,7 @@
 
 @media (min-width: 768px) {
     .contact__content {
-        top: 72%;
+        top: 50%;
         transform: translate(-50%, -50%);
         margin: 40px 0;
     }
