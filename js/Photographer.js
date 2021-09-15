@@ -77,7 +77,7 @@ class Photographer
                     <div class="filter__list" id="listbox" role="button" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="orderBy">
                         <button class="filter__list__item" data-name="Popularité" role="option" aria-activedescendant='true'> Popularité</button>
                         <button class="filter__list__item" data-name="Date" role="option" aria-activedescendant='true'> Date</button>
-                        <button class="filter__list__item" data-name="Titre"  role="option" aria-activedescendant='true'> Titre</button>    
+                        <button class="filter__list__item" data-name="Titre" role="option" aria-activedescendant='true'> Titre</button>    
                     </div>
                 </div>`
     }

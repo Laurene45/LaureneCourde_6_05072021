@@ -16,22 +16,38 @@ class Portfolio
     }
 
     // -- Formulaire : ferme la modal
+
+    close()
+    {
+        const contactCloseBtn = document.querySelector("#contactClose");
+        const contactBg = document.querySelector("#contact");
+        const main= document.querySelector("main");
+        document.body.classList.remove('modalOpen');
+        contactBg.style.display = "none";
+        main.setAttribute('aria-hidden', 'false');
+        contactBg.setAttribute('aria-hidden', 'true');
+    }
+
     closeModal()
     {
         document.querySelector("#contactClose").addEventListener("click", () =>
         {
-            const contactCloseBtn = document.querySelector("#contactClose");
-            const contactBg = document.querySelector("#contact");
-            const main= document.querySelector("main");
-
-            document.body.classList.remove('modalOpen');
-            contactBg.style.display = "none";
-            main.setAttribute('aria-hidden', 'false');
-            contactBg.setAttribute('aria-hidden', 'true');
-
-        })
+            this.close()                                                          
+         })
     }
 
+    keyboardModal()
+    {
+        document.addEventListener('keydown', (key) => 
+        {
+        //-- echap pour fermer
+            if (key.code == 'Escape') 
+            {
+                this.close();
+            } 
+        }); 
+    }
+    
 
     //-- Like : compteur total de likes en bas de page
     createCount()
@@ -115,11 +131,12 @@ class Portfolio
             contactName.textContent = "Contactez-moi " +  
             contactBtn.getAttribute('data-name');
             contactBg.style.display = "block";
+            document.getElementById('firstname').focus();
             main.setAttribute('aria-hidden', 'true');
             contactBg.setAttribute('aria-hidden', 'false');
-            document.getElementById('contactClose').focus();
             
         })
+        this.keyboardModal();
 
     }
 
